@@ -72,7 +72,6 @@ def tweet(data):
     api = tweepy.API(auth, wait_on_rate_limit=True,
         wait_on_rate_limit_notify=True)
 
-
     # date_cases_capiz
     # total_cases
     # active cases
@@ -129,9 +128,51 @@ def tweet(data):
             """.format(' '.join(data['date_facilities']),''.join(data['bed_occupancy'][0]),''.join(data['bed_occupancy'][1])), in_reply_to_status_id=tweet2.id)
 
 
-    tweet4 = api.update_status("""Date of runtime: {}
+    api.update_status("""Date of runtime: {}
             @rxstwitte_rbot
-            """.format(now.strftime("%Y-%m-%d")), in_reply_to_status_id=tweet3.id)
+            """.format(now.strftime("%Y-%B-%d")), in_reply_to_status_id=tweet3.id)
+
+
+def user_stats_retweet(user_name):
+    # initialize keys from local file
+    key_list = []
+    with open('twitterkeys.txt', 'r') as keys:
+        i = 1
+        for key in keys:
+            key_list.append(key.strip())
+            i += 1
+    key_name = ['API_key', 'API_secret_key', 'Access_token', 'Access_token_secret']
+    key_dict = {}
+    for k,v in zip(key_name, key_list):
+        key_dict[k] = v
+
+    # Authenticate to Twitter
+    auth = tweepy.OAuthHandler(key_dict['API_key'], 
+        key_dict['API_secret_key'])
+    auth.set_access_token(key_dict['Access_token'], 
+        key_dict['Access_token_secret'])
+    api = tweepy.API(auth)
+    try:
+        api.verify_credentials()
+        print("Authentication OK")
+    except:
+        print("Error during authentication")
+    api = tweepy.API(auth, wait_on_rate_limit=True,
+        wait_on_rate_limit_notify=True)
+
+    # get user ID and latest tweets
+    now = datetime.now()
+    user = api.get_user(user_name)
+    statuses = api.user_timeline(user.id, count=5)
+    for status in statuses:
+        search_string = 'Updated from @DOHgovph this {} {}'.format(
+            now.strftime('%d'), now.strftime('%B')
+        )
+        search_string = 'Updates from @DOHgovph this 11 December'
+        if search_string in status.text:
+            retweet_id = status.id
+    api.retweet(retweet_id)
+    print('Retweeted - tweet ID: {}'.format(retweet_id))
 
 
 def main():
@@ -142,3 +183,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

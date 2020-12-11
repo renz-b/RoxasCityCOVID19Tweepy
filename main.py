@@ -5,9 +5,6 @@ import os
 
 root_dir = os.getcwd()
 
-def if_same_data_latest_news():
-    pass
-
 def edit_data_before_tweet(data_dict):
     # Changes data before tweeting
     while True:
@@ -44,7 +41,6 @@ def edit_data_before_tweet(data_dict):
             break
 
 
-
 def main():
     image_to_text.files_workdir()
     image_to_text.folder_date()
@@ -59,18 +55,23 @@ def main():
     with open('data.txt') as file:
         for line in file.readlines():
             print(line)
+            print('\n')
     print(data_dict)
 
-    user_input = input('Continue? y/n\n')
+    user_input = input('Tweet data? y/n')
     if user_input == 'y':
         # tweets data if ok with user
         # appends to txt file in root folder for future purposes
         image_to_text.write_to_file(data_dict)
         rctweepy.tweet(data_dict)
     else:
-        print('Double check data\n')
-        # calls function that can edit dictionary
-        edit_data_before_tweet(data_dict)
+        # if data is duplicate or same from yesterday retweet latest covid sats from chosen user
+        dupe = input('Is data duplicate? y/n\n')
+        if dupe == 'y':
+            rctweepy.user_stats_retweet('WHOPhilippines')
+        else:
+            # calls function that can edit dictionary
+            edit_data_before_tweet(data_dict)
         
 
 if __name__ == '__main__':
