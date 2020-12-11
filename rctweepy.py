@@ -1,7 +1,7 @@
 import tweepy
 from datetime import datetime
 import re
-# import if already have screenshots and tweet directly
+# import image_to_text if already have screenshots and tweet directly
 # import image_to_text
 
 
@@ -41,23 +41,24 @@ def v1():
 
 
 def tweet(data):
-    with open('twitterkeys.txt', 'r') as keys:
+    now = datetime.now()
     key_list = []
-    i = 1
-    for key in keys:
-        key_list.append(key.strip())
-        i += 1
+    with open('twitterkeys.txt', 'r') as keys:
+        i = 1
+        for key in keys:
+            key_list.append(key.strip())
+            i += 1
 
     key_name = ['API_key', 'API_secret_key', 'Access_token', 'Access_token_secret']
     key_dict = {}
     for k,v in zip(key_name, key_list):
-        ey_dict[k] = v
+        key_dict[k] = v
 
     # Authenticate to Twitter
-    auth = tweepy.OAuthHandler(API_key, 
-        API_secret_key)
-    auth.set_access_token(Access_token, 
-        Access_token_secret)
+    auth = tweepy.OAuthHandler(key_dict['API_key'], 
+        key_dict['API_secret_key'])
+    auth.set_access_token(key_dict['Access_token'], 
+        key_dict['Access_token_secret'])
 
     api = tweepy.API(auth)
 
@@ -104,7 +105,7 @@ def tweet(data):
     - {}
     - {}
     - {}
-    @Iamabot20385630
+    @rxstwitte_rbot
         """.format(
             ' '.join(data['date_roxas_lab']),
             ' '.join(data['individuals_tested'][0:6]),
@@ -117,16 +118,20 @@ def tweet(data):
     # facilities
     # bed occupancy
 
-    api.update_status("""[3/3]
+    tweet3 = api.update_status("""[3/3]
             \nHospital Beds of 5 City Hospitals:\n
             \n{}:
             - Occupied {}
             - Vacant {}\n\n
             \nHospitals:
             - CDH, CEH, RMPH, St. Anthony, The Health Centrum
-            @Iamabot20385630
+            @rxstwitte_rbot
             """.format(' '.join(data['date_facilities']),''.join(data['bed_occupancy'][0]),''.join(data['bed_occupancy'][1])), in_reply_to_status_id=tweet2.id)
 
+
+    tweet4 = api.update_status("""Date of runtime: {}
+            @rxstwitte_rbot
+            """.format(now.strftime("%Y-%m-%d")), in_reply_to_status_id=tweet3.id)
 
 
 def main():

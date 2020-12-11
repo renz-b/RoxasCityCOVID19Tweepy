@@ -59,7 +59,7 @@ def automation_script():
     link.click()
     time.sleep(1)
     # Clicks Roxas Lab checkbox
-    link = driver.find_element_by_xpath("""//*[@id="FI_federated.0jj2drt07e2rvp0zope591re6hui,none:facility_name:nk9923946406123244083_8775405739952795266_129"]/div[2]/input""")
+    link = driver.find_element_by_xpath("""//*[@id="FI_federated.0jj2drt07e2rvp0zope591re6hui,none:facility_name:nk9923946406123244083_8775405739952795266_130"]/div[2]/input""")
     link.click()
     time.sleep(10)
     # Clicks Apply button

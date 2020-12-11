@@ -12,12 +12,13 @@ def main():
     # pytess func returns dict type of data
     data_dict = image_to_text.pytess()
     with open('data.txt') as file:
-        print(file.read())
-    user_input = input('Continue?')
+        for line in file.readlines():
+            print(line)
+    user_input = input('Continue? yes/no')
     if user_input == 'yes':
         rctweepy.tweet(data_dict)
     else:
-        print('Did not tweet same data')
+        print('Double check data')
 
 if __name__ == '__main__':
     main()
