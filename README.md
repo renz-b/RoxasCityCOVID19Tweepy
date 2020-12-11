@@ -41,5 +41,5 @@ V 1.0.0
 
 
 > Dependencies are in requirements.txt
-pip install requirements.txt
-(note: had to install pytesseract separetly after importing and specifying the PATH)
+- pip install requirements.txt
+- (note: had to install pytesseract separetly after importing and specifying the PATH)
