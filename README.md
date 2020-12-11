@@ -10,7 +10,7 @@ If data is duplicate from yesterday, automated retweet from latest COVID 19 news
 Python 3.9
 
 V 2.4.0
-= Func: If data is duplicate from yesterday or unupdated, bot will retweet latest COVID stats from WHO
+- Func: If data is duplicate from yesterday or unupdated, bot will retweet latest COVID stats from WHO
 
 V 2.3.0
 - Func: Show data before calling tweet function to double check data, now able to edit dictionary of data before tweeting
