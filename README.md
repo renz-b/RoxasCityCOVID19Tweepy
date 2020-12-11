@@ -8,6 +8,11 @@ I then use pytesseract to recognize text and numbers on the screenshot which the
 
 Python 3.9
 
+V 2.3.0
+- Func: Show data before calling tweet function to double check data, now able to edit dictionary of data before tweeting
+- Added: bat file
+- Todo: If data is the same as yesterday, apply covid stream to tweet latest covid news instead, will add if screenshots if exists so that program does not have to run every single time
+
 V 2.2.0
 - Style: added date-of-runtime
 - Func: improved modularity

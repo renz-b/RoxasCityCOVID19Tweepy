@@ -42,7 +42,7 @@ def folder_date():
 
 # appends to a txt file in type str for future purposes
 def write_to_file(data):
-    os.chdir(root)  
+    os.chdir(root)
     with open('data.txt', 'a') as file:
         file.write('{}\n'.format(str(data)))
 
@@ -55,6 +55,7 @@ def pytess():
     # use this if already have screenshots and import to rctweepy
     files = os.listdir()
     data = {}
+    data['_id'] = date.strftime('%m-%d-%Y')
     for _file in files:
         img = Image.open(_file)
         greyimg = ImageOps.grayscale(img)
@@ -63,9 +64,7 @@ def pytess():
         factor = 1.25
         sharpened = sharpimg.enhance(factor)
         text = tess.image_to_string(sharpened, config="--psm 6")
-        data['_id'] = date.strftime('%m-%d-%Y')
         data['{}'.format(_file.strip('.png'))] = text.split()
-    write_to_file(data)
     return data
 
 
