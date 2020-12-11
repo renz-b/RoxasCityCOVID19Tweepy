@@ -1,5 +1,5 @@
 # RoxasCityCOVID19Tweepy-
-
+@rxstwitte_rbot
 
 ROXAS CITY COVID 19 BOT
 > I am a bot that tweets COVID 19 stats. I use selenium to automate navigation through the website (simple requests HTML does not work) and then takes a screenshot of the desired data.
@@ -7,6 +7,13 @@ I then use pytesseract to recognize text and numbers on the screenshot which the
 
 
 Python 3.9
+
+V 2.2.0
+- Style: added date-of-runtime
+- Func: improved modularity
+- New twitter profile: @rxstwitte_rbot
+- Todo: Improve PIL image enhancing for better detection of OCR
+
 
 V 2.1.0
 - Added code so that tweets would be in a thread
