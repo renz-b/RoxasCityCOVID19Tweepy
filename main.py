@@ -2,8 +2,11 @@ import image_to_text
 import screenshot_selenium
 import rctweepy
 import os
+from datetime import datetime
 
 root_dir = os.getcwd()
+now = datetime.now()
+current_date = now.strftime('%Y-%m-%d')
 
 def edit_data_before_tweet(data_dict):
     # Changes data before tweeting
@@ -40,22 +43,31 @@ def edit_data_before_tweet(data_dict):
         else:
             break
 
-
-def main():
+def current_covid_19_data_dictionary():
     image_to_text.files_workdir()
     image_to_text.folder_date()
     screenshot_selenium.automation_script()
     screenshot_selenium.scrnshot()
-
     # pytess func returns dict type of data
-    data_dict = image_to_text.pytess()
+    return image_to_text.pytess()
 
+def current_covid_19_data_dictionary_ifwithscreenshots(date=current_date):
+    if os.getcwd() == root_dir:
+        os.chdir('..\\files\\{}'.format(date))
+    else:
+        os.chdir(root_dir)
+        os.chdir('..\\files\\{}'.format(date))
+    return image_to_text.pytess()
+
+
+def main():
     # prints lines to terminal for double checking
     os.chdir(root_dir)
-    with open('data.txt') as file:
+    with open('data.txt', 'r') as file:
         for line in file.readlines():
             print(line)
             print('\n')
+    data_dict = current_covid_19_data_dictionary        
     print(data_dict)
 
     user_input = input('Tweet data? y/n')
@@ -75,4 +87,4 @@ def main():
         
 
 if __name__ == '__main__':
-    main()
+    print(current_covid_19_data_dictionary_ifwithscreenshots())

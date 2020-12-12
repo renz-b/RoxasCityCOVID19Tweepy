@@ -4,10 +4,14 @@
 ROXAS CITY COVID 19 BOT
 > I am a bot that tweets COVID 19 stats. I use selenium to automate navigation through the website (simple requests HTML does not work) and then takes a screenshot of the desired data.
 I then use pytesseract to recognize text and numbers on the screenshot which then returns a string. String is then formatted and tweeted using Tweepy API.
-
-If data is duplicate from yesterday, automated retweet from latest COVID 19 news from WHO.
+> If data is duplicate from yesterday, automated retweet from latest COVID 19 news from WHO.
 
 Python 3.9
+
+V 2.5.0
+- Func: Improved modularity; added function if with screenshots selenium script does not have to run again. Added error handling in retweet. 
+- Todo: Further error handling if with invalid user inputs
+- Plan: V 3.0.0 source: DOH data drop consisting of CSV files. Parse using pandas.
 
 V 2.4.0
 - Func: If data is duplicate from yesterday or unupdated, bot will retweet latest COVID stats from WHO

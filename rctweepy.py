@@ -159,21 +159,22 @@ def user_stats_retweet(user_name):
         print("Error during authentication")
     api = tweepy.API(auth, wait_on_rate_limit=True,
         wait_on_rate_limit_notify=True)
-
-    # get user ID and latest tweets
-    now = datetime.now()
-    user = api.get_user(user_name)
-    statuses = api.user_timeline(user.id, count=5)
-    for status in statuses:
-        search_string = 'Updated from @DOHgovph this {} {}'.format(
-            now.strftime('%d'), now.strftime('%B')
-        )
-        search_string = 'Updates from @DOHgovph this 11 December'
-        if search_string in status.text:
-            retweet_id = status.id
-    api.retweet(retweet_id)
-    print('Retweeted - tweet ID: {}'.format(retweet_id))
-
+    try:    
+        # get user ID and latest tweets
+        now = datetime.now()
+        user = api.get_user(user_name)
+        statuses = api.user_timeline(user.id, count=5)
+        for status in statuses:
+            search_string = 'Updated from @DOHgovph this {} {}'.format(
+                now.strftime('%d'), now.strftime('%B')
+            )
+            search_string = 'Updates from @DOHgovph this 11 December'
+            if search_string in status.text:
+                retweet_id = status.id
+        api.retweet(retweet_id)
+        print('Retweeted - tweet ID: {}'.format(retweet_id))
+    except tweepy.error.TweepError:
+        print('Already retweeted')
 
 def main():
     # use this directly if already have the data and screenshots
@@ -182,5 +183,5 @@ def main():
     pass
 
 if __name__ == "__main__":
-    main()
+    user_stats_retweet('WHOPhilippines')
 
