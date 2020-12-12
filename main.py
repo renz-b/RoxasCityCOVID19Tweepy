@@ -87,4 +87,4 @@ def main():
         
 
 if __name__ == '__main__':
-    print(current_covid_19_data_dictionary_ifwithscreenshots())
+    main()
