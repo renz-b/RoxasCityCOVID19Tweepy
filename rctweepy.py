@@ -39,6 +39,32 @@ def v1():
     # end V1.0.0
     pass
 
+def init_twitter():
+    # initialize keys from local file
+    key_list = []
+    with open('twitterkeys.txt', 'r') as keys:
+        i = 1
+        for key in keys:
+            key_list.append(key.strip())
+            i += 1
+    key_name = ['API_key', 'API_secret_key', 'Access_token', 'Access_token_secret']
+    key_dict = {}
+    for k,v in zip(key_name, key_list):
+        key_dict[k] = v
+
+    # Authenticate to Twitter
+    auth = tweepy.OAuthHandler(key_dict['API_key'], 
+        key_dict['API_secret_key'])
+    auth.set_access_token(key_dict['Access_token'], 
+        key_dict['Access_token_secret'])
+    api = tweepy.API(auth)
+    try:
+        api.verify_credentials()
+        print("Authentication OK")
+    except:
+        print("Error during authentication")
+    return tweepy.API(auth, wait_on_rate_limit=True,
+        wait_on_rate_limit_notify=True)
 
 def tweet(data):
     now = datetime.now()
@@ -133,48 +159,31 @@ def tweet(data):
             """.format(now.strftime("%Y-%B-%d")), in_reply_to_status_id=tweet3.id)
 
 
-def user_stats_retweet(user_name):
-    # initialize keys from local file
-    key_list = []
-    with open('twitterkeys.txt', 'r') as keys:
-        i = 1
-        for key in keys:
-            key_list.append(key.strip())
-            i += 1
-    key_name = ['API_key', 'API_secret_key', 'Access_token', 'Access_token_secret']
-    key_dict = {}
-    for k,v in zip(key_name, key_list):
-        key_dict[k] = v
-
-    # Authenticate to Twitter
-    auth = tweepy.OAuthHandler(key_dict['API_key'], 
-        key_dict['API_secret_key'])
-    auth.set_access_token(key_dict['Access_token'], 
-        key_dict['Access_token_secret'])
-    api = tweepy.API(auth)
-    try:
-        api.verify_credentials()
-        print("Authentication OK")
-    except:
-        print("Error during authentication")
-    api = tweepy.API(auth, wait_on_rate_limit=True,
-        wait_on_rate_limit_notify=True)
+def user_stats_retweet():
+    api = init_twitter()
+    users = {'1': "WHOPhilippines", '2': "PhilippineStar"}
+    print(users)
+    user_input = input('Retweet from: ')
+    user_name = users[user_input]
     try:    
-        # get user ID and latest tweets
-        now = datetime.now()
+        # get user ID and latest tweets1
         user = api.get_user(user_name)
         statuses = api.user_timeline(user.id, count=5)
+        print('Example: @DOHgovph this <Month> <day>, vaccine, #COVID19PH')
+        search_string = (input('Search in tweet: '))
+        retweet_id = ''
         for status in statuses:
-            search_string = 'Updated from @DOHgovph this {} {}'.format(
-                now.strftime('%d'), now.strftime('%B')
-            )
-            search_string = 'Updates from @DOHgovph this 11 December'
             if search_string in status.text:
                 retweet_id = status.id
-        api.retweet(retweet_id)
-        print('Retweeted - tweet ID: {}'.format(retweet_id))
-    except tweepy.error.TweepError:
-        print('Already retweeted')
+                print(status.text)
+        tweet_ = input('Retweet? y/n\n')
+        if tweet_ == 'y':
+            api.retweet(retweet_id)
+            print('Retweeted - tweet ID: {}'.format(retweet_id))
+        else:
+            print('End')
+    except:
+        print('Error')
 
 def main():
     # use this directly if already have the data and screenshots
@@ -183,5 +192,5 @@ def main():
     pass
 
 if __name__ == "__main__":
-    user_stats_retweet('WHOPhilippines')
+    user_stats_retweet()
 
