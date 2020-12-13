@@ -67,37 +67,10 @@ def init_twitter():
         wait_on_rate_limit_notify=True)
 
 def tweet(data):
+    api = init_twitter()
+
     now = datetime.now()
-    key_list = []
-    with open('twitterkeys.txt', 'r') as keys:
-        i = 1
-        for key in keys:
-            key_list.append(key.strip())
-            i += 1
-
-    key_name = ['API_key', 'API_secret_key', 'Access_token', 'Access_token_secret']
-    key_dict = {}
-    for k,v in zip(key_name, key_list):
-        key_dict[k] = v
-
-    # Authenticate to Twitter
-    auth = tweepy.OAuthHandler(key_dict['API_key'], 
-        key_dict['API_secret_key'])
-    auth.set_access_token(key_dict['Access_token'], 
-        key_dict['Access_token_secret'])
-
-    api = tweepy.API(auth)
-
-    try:
-        api.verify_credentials()
-        print("Authentication OK")
-    except:
-        print("Error during authentication")
-
-
-    api = tweepy.API(auth, wait_on_rate_limit=True,
-        wait_on_rate_limit_notify=True)
-
+    
     # date_cases_capiz
     # total_cases
     # active cases
