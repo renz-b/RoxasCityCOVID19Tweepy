@@ -8,6 +8,9 @@ I then use pytesseract to recognize text and numbers on the screenshot which the
 
 Python 3.9
 
+V 2.7.0
+- Func: Added tweets.txt function to rctweepy.py using a nested function
+
 V 2.6.0
 - Func: Now able to get data type string from data.txt and convert it to a dictionary 
     (data_dict -> write to data.txt as string -> used import ast -> read data.txt as string ->data_dict)

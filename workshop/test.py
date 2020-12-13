@@ -15,24 +15,40 @@
 
 
 # forever loop for heroku
-import time
-not_retweeted = True
+# import time
+# not_retweeted = True
 
-while not_retweeted is True:
-    # get_user get_timeline that checks the latest tweets with search paramaters using datetime
-    # this should be a function if no tweets found should return None
-    print('no new tweet')
-    # if statement if func returns string_of_tweet retweet
-    #time.sleep(5minutes)
-    x = input('retweet?')
-    if x == 'y': 
-    # if x == returns (string of tweet)
-    # x == returns none from get_user get_timelines function go to else continue 
-        retweeted = True
-        while retweeted is True:
-            print('already retweeted')
-            time.sleep(1) # calculation for 24 hour variable
-            retweeted = False
-    else:
-        continue
+# while not_retweeted is True:
+#     # get_user get_timeline that checks the latest tweets with search paramaters using datetime
+#     # this should be a function if no tweets found should return None
+#     print('no new tweet')
+#     # if statement if func returns string_of_tweet retweet
+#     #time.sleep(5minutes)
+#     x = input('retweet?')
+#     if x == 'y': 
+#     # if x == returns (string of tweet)
+#     # x == returns none from get_user get_timelines function go to else continue 
+#         retweeted = True
+#         while retweeted is True:
+#             print('already retweeted')
+#             time.sleep(1) # calculation for 24 hour variable
+#             retweeted = False
+#     else:
+#         continue
 
+def func1():
+    var1 = "hi"
+    var2 = "hello"
+    var3 = "world"
+
+    def func2():
+        long_var = '{} {} {}'.format(var1, var2, var3)
+        print(long_var)
+
+    func2()
+    
+
+
+
+
+func1()

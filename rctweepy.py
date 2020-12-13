@@ -127,9 +127,17 @@ def tweet(data):
             """.format(' '.join(data['date_facilities']),''.join(data['bed_occupancy'][0]),''.join(data['bed_occupancy'][1])), in_reply_to_status_id=tweet2.id)
 
 
-    api.update_status("""Date of runtime: {}
+    tweet4 = api.update_status("""Date of runtime: {}
             @rxstwitte_rbot
             """.format(now.strftime("%Y-%B-%d")), in_reply_to_status_id=tweet3.id)
+    
+    def write_to_file_tweets():
+        tweets = '{}\n{}\n{}\n{}'.format(tweet1.text, tweet2.text, tweet3.text, tweet4.text)
+        with open('tweets.txt', 'a') as file:
+            file.write(tweets)
+
+    write_to_file_tweets()
+
 
 
 def user_stats_retweet():
@@ -157,6 +165,9 @@ def user_stats_retweet():
             print('End')
     except:
         print('Error')
+
+
+
 
 def main():
     # use this directly if already have the data and screenshots
