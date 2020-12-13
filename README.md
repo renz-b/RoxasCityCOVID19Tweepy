@@ -8,6 +8,13 @@ I then use pytesseract to recognize text and numbers on the screenshot which the
 
 Python 3.9
 
+V 2.6.0
+- Func: Now able to get data type string from data.txt and convert it to a dictionary 
+    (data_dict -> write to data.txt as string -> used import ast -> read data.txt as string ->data_dict)
+- Func: Added pretty_print function to easily view previous data
+- Added workshop folder to show: test.py, TODO.txt
+
+
 V 2.5.0
 - Func: Improved modularity; added function if with screenshots selenium script does not have to run again. Added error handling in retweet. 
 - Todo: Further error handling if with invalid user inputs

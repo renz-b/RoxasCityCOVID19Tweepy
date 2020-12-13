@@ -2,6 +2,7 @@ import image_to_text
 import screenshot_selenium
 import rctweepy
 import os
+import ast
 from datetime import datetime
 
 root_dir = os.getcwd()
@@ -59,18 +60,30 @@ def current_covid_19_data_dictionary_ifwithscreenshots(date=current_date):
         os.chdir('..\\files\\{}'.format(date))
     return image_to_text.pytess()
 
+def data_pretty_print():
+    os.chdir(root_dir)
+    dict_history = {}
+    with open('data.txt', 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            dict_ = ast.literal_eval(line)
+            date_key = dict_['_id']
+            dict_history[date_key] = dict_
+            for k, v in dict_history[date_key].items():
+                print('{}: {}'.format(k,v))
+            print('\n\n')
 
 def main():
-    # prints lines to terminal for double checking
-    os.chdir(root_dir)
-    with open('data.txt', 'r') as file:
-        for line in file.readlines():
-            print(line)
-            print('\n')
-    data_dict = current_covid_19_data_dictionary        
-    print(data_dict)
+    data_pretty_print()
+    data_dict = current_covid_19_data_dictionary()  
 
-    user_input = input('Tweet data? y/n')
+    # if already with screenshots
+    # data_dict = current_covid_19_data_dictionary_ifwithscreenshots()
+    
+    for k, v in data_dict.items():
+        print('{}: {}'.format(k, v))
+
+    user_input = input('Tweet data? (y/n)\n')
     if user_input == 'y':
         # tweets data if ok with user
         # appends to txt file in root folder for future purposes
@@ -78,9 +91,10 @@ def main():
         rctweepy.tweet(data_dict)
     else:
         # if data is duplicate or same from yesterday retweet latest covid sats from chosen user
-        dupe = input('Is data duplicate? y/n\n')
+        dupe = input('Is data duplicate? (y/n)\n')
         if dupe == 'y':
-            rctweepy.user_stats_retweet('WHOPhilippines')
+            os.chdir(root_dir)
+            rctweepy.user_stats_retweet()
         else:
             # calls function that can edit dictionary
             edit_data_before_tweet(data_dict)

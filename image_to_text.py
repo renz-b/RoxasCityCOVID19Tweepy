@@ -32,12 +32,12 @@ def folder_date():
         file_path = os.getcwd()
 
     list_dirs = os.listdir()
-    folder_name = date.strftime('%m-%d-%Y')
+    folder_name = date.strftime('%Y-%m-%d')
     
     if folder_name in list_dirs:
         os.chdir(folder_name)
     else:
-        os.mkdir('{}\{}'.format(file_path, folder_name))
+        os.mkdir('{}\\{}'.format(file_path, folder_name))
         os.chdir(folder_name)
 
 # appends to a txt file in type str for future purposes
@@ -55,7 +55,7 @@ def pytess():
     # use this if already have screenshots and import to rctweepy
     files = os.listdir()
     data = {}
-    data['_id'] = date.strftime('%m-%d-%Y')
+    data['_id'] = date.strftime('%Y-%m-%d')
     for _file in files:
         img = Image.open(_file)
         greyimg = ImageOps.grayscale(img)
@@ -78,3 +78,4 @@ def main():
     pass
 if __name__ == '__main__':
     main()
+    

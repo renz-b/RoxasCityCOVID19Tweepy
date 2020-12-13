@@ -1,9 +1,9 @@
 import tweepy
 from datetime import datetime
 import re
+import os
 # import image_to_text if already have screenshots and tweet directly
 # import image_to_text
-
 
 def v1():
     # # V 1.0.0 code
@@ -168,8 +168,8 @@ def user_stats_retweet():
     try:    
         # get user ID and latest tweets1
         user = api.get_user(user_name)
-        statuses = api.user_timeline(user.id, count=5)
-        print('Example: @DOHgovph this <Month> <day>, vaccine, #COVID19PH')
+        statuses = api.user_timeline(user.id, count=20)
+        print('Example: @DOHgovph this <Day> <Month>, vaccine, #COVID19PH')
         search_string = (input('Search in tweet: '))
         retweet_id = ''
         for status in statuses:
@@ -193,4 +193,3 @@ def main():
 
 if __name__ == "__main__":
     user_stats_retweet()
-

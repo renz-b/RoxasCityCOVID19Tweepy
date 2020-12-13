@@ -1,0 +1,17 @@
+1. Find a way to convert to type dict from type str in data.txt (done- used import ast)
+2. Format tweet to show current change (ie: Died: 1 added (Total: 43)) 
+    - Now easier: read data.txt and convert to dict to easily call the key value pairs
+3. tweet5 = Rate positivity case picture (tweet media)
+4. Heroku implementation
+    - Create a forever while loop
+    while not_retweeted is True:
+        - Check WHO profile for new tweet every 5 mins for COVID 19 stats
+        - use import datetime as a search string for [day] [month]
+        - Once retweeted
+        not_retweeted = False
+        While already_retweeted = True
+            -time.sleep 24 hours?
+            -use datetime to subtract remaining time of the day place it in variable
+            -time.sleep(remaining_time_variable)
+            not_retweeted = True
+5. Add a log file for every when the bot detects a retweet
