@@ -132,7 +132,7 @@ def tweet(data):
             """.format(now.strftime("%Y-%B-%d")), in_reply_to_status_id=tweet3.id)
     
     def write_to_file_tweets():
-        tweets = '{}\n{}\n{}\n{}'.format(tweet1.text, tweet2.text, tweet3.text, tweet4.text)
+        tweets = """{{'{}':[\n{}\n{}\n{}\n{}\n]}}\n""".format(now.strftime("%Y-%B-%d"), tweet1.text, tweet2.text, tweet3.text, tweet4.text)
         with open('tweets.txt', 'a') as file:
             file.write(tweets)
 

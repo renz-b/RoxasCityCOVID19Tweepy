@@ -12,7 +12,7 @@ current_date = now.strftime('%Y-%m-%d')
 def edit_data_before_tweet(data_dict):
     # Changes data before tweeting
     while True:
-        edit = input('Edit keys? y/n \n')
+        edit = input('Edit keys? (y/n): \n')
         if edit == 'y':
             key_ = input('Key: ')
             if type(data_dict[key_]) == list:
@@ -26,14 +26,14 @@ def edit_data_before_tweet(data_dict):
                     print(data_dict[key_])
                 else:
                     print(data_dict[key_])
-                    list_ = input('List:')
+                    list_ = input('List: ')
                     data_dict[key_] = list_.split()
                     print(data_dict[key_])
             else:
                 value_ = input('Corrected value: ')
                 data_dict[key_] = value_
             print(data_dict)
-            bool_ = input('Continue edit (y/n): ')
+            bool_ = input('Continue edit (y/n): \n')
             if bool_ == 'n':
                 # appends to txt file in root folder for future purposes
                 image_to_text.write_to_file(data_dict)

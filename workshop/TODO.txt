@@ -15,3 +15,4 @@
             -time.sleep(remaining_time_variable)
             not_retweeted = True
 5. Add a log file for every when the bot detects a retweet
+6. Include retweet search parameters astrazenica, vaccine 
