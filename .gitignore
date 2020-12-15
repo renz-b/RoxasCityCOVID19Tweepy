@@ -5,3 +5,5 @@ debug.txt
 debug.log
 twitterkeys.txt
 main.bat
+.idea/*
+venv/*
