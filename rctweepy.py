@@ -2,6 +2,7 @@ import tweepy
 from datetime import datetime
 import re
 import os
+import ast
 # import image_to_text if already have screenshots and tweet directly
 # import image_to_text
 
@@ -89,7 +90,7 @@ def tweet(data):
             ' '.join(data['active_cases']),
             ' '.join(data['recovered']),
             ' '.join(data['died']),
-                ), truncated=True)
+                ))
 
 
 
@@ -110,7 +111,7 @@ def tweet(data):
             ' '.join(data['samples_tested'][0:4]),
             ' '.join(data['samples_tested'][4:9]),
             ' '.join(data['samples_tested'][9:13])
-                ), in_reply_to_status_id=tweet1.id, truncated=True)
+                ), in_reply_to_status_id=tweet1.id)
 
 
     # facilities
@@ -125,12 +126,12 @@ def tweet(data):
             - CDH, CEH, RMPH, St. Anthony, The Health Centrum
             @rxstwitte_rbot
             """.format(' '.join(data['date_facilities']),''.join(data['bed_occupancy'][0]),''.join(data['bed_occupancy'][1])), 
-            in_reply_to_status_id=tweet2.id, truncated=True)
+            in_reply_to_status_id=tweet2.id)
 
 
     tweet4 = api.update_status("""Date of runtime: {}
             @rxstwitte_rbot
-            """.format(now.strftime("%Y-%B-%d")), in_reply_to_status_id=tweet3.id, truncated=True)
+            """.format(now.strftime("%Y-%B-%d")), in_reply_to_status_id=tweet3.id)
     
     def write_to_file_tweets():
         tweets = """{{'{}':[\n{}\n{}\n{}\n{}\n]}}\n""".format(now.strftime("%Y-%B-%d"), tweet1.text, tweet2.text, tweet3.text, tweet4.text)
@@ -183,4 +184,15 @@ def main():
     pass
 
 if __name__ == "__main__":
+    # use this if data is already in data.txt
+    # dict_history = {}
+    # with open('data.txt', 'r') as file:
+    #     lines = file.readlines()
+    #     for line in lines:
+    #         dict_ = ast.literal_eval(line)
+    #         date_key = dict_['_id']
+    #         dict_history[date_key] = dict_
+    #     data = dict_history['2020-12-16']
+    # tweet(data)
     user_stats_retweet()
+    pass
