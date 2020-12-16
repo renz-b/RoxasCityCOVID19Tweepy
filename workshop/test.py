@@ -36,19 +36,23 @@
 #     else:
 #         continue
 
-def func1():
-    var1 = "hi"
-    var2 = "hello"
-    var3 = "world"
+import os
+import re
 
-    def func2():
-        long_var = '{} {} {}'.format(var1, var2, var3)
-        print(long_var)
-
-    func2()
-    
+root_dir = os.getcwd()
 
 
+with open('tweets.txt', 'r') as file:
+    lines = file.readlines()
+    tweet = ''
+    for line in lines:
+        newline = line.replace('\n', ' ')
+        tweet += newline
+        s = re.sub(r"\s+", ' ', tweet)
 
+        
 
-func1()
+        
+with open('tweets2.txt', 'a') as file:
+    file.write(s)
+

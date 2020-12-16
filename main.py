@@ -87,8 +87,8 @@ def main():
     if user_input == 'y':
         # tweets data if ok with user
         # appends to txt file in root folder for future purposes
-        image_to_text.write_to_file(data_dict)
         rctweepy.tweet(data_dict)
+        image_to_text.write_to_file(data_dict)
     else:
         # if data is duplicate or same from yesterday retweet latest covid sats from chosen user
         dupe = input('Is data duplicate? (y/n)\n')

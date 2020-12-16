@@ -89,7 +89,7 @@ def tweet(data):
             ' '.join(data['active_cases']),
             ' '.join(data['recovered']),
             ' '.join(data['died']),
-                ))
+                ), truncated=True)
 
 
 
@@ -110,7 +110,7 @@ def tweet(data):
             ' '.join(data['samples_tested'][0:4]),
             ' '.join(data['samples_tested'][4:9]),
             ' '.join(data['samples_tested'][9:13])
-                ), in_reply_to_status_id=tweet1.id)
+                ), in_reply_to_status_id=tweet1.id, truncated=True)
 
 
     # facilities
@@ -124,17 +124,24 @@ def tweet(data):
             \nHospitals:
             - CDH, CEH, RMPH, St. Anthony, The Health Centrum
             @rxstwitte_rbot
-            """.format(' '.join(data['date_facilities']),''.join(data['bed_occupancy'][0]),''.join(data['bed_occupancy'][1])), in_reply_to_status_id=tweet2.id)
+            """.format(' '.join(data['date_facilities']),''.join(data['bed_occupancy'][0]),''.join(data['bed_occupancy'][1])), 
+            in_reply_to_status_id=tweet2.id, truncated=True)
 
 
     tweet4 = api.update_status("""Date of runtime: {}
             @rxstwitte_rbot
-            """.format(now.strftime("%Y-%B-%d")), in_reply_to_status_id=tweet3.id)
+            """.format(now.strftime("%Y-%B-%d")), in_reply_to_status_id=tweet3.id, truncated=True)
     
     def write_to_file_tweets():
         tweets = """{{'{}':[\n{}\n{}\n{}\n{}\n]}}\n""".format(now.strftime("%Y-%B-%d"), tweet1.text, tweet2.text, tweet3.text, tweet4.text)
+        stripped_tweet = ''
+        tweet = ''
+        for line in tweets:
+            newline = line.replace('\n', ' ')
+            tweet += newline
+            tweet_to_txt = re.sub(r"\s+", ' ', stripped_tweet)
         with open('tweets.txt', 'a') as file:
-            file.write(tweets)
+            file.write(tweet_to_txt)
 
     write_to_file_tweets()
 
