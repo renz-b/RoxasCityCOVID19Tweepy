@@ -8,6 +8,9 @@ I then use pytesseract to recognize text and numbers on the screenshot which the
 
 Python 3.9
 
+Doing testing on 'test' branch. Adding tinyDB and trying to visualize data
+
+
 V 2.7.0
 - Func: Added tweets.txt function to rctweepy.py using a nested function
 

@@ -40,6 +40,7 @@ def v1():
     # end V1.0.0
     pass
 
+
 def init_twitter():
     # initialize keys from local file
     key_list = []
@@ -66,6 +67,7 @@ def init_twitter():
         print("Error during authentication")
     return tweepy.API(auth, wait_on_rate_limit=True,
         wait_on_rate_limit_notify=True)
+
 
 def tweet(data):
     api = init_twitter()
@@ -147,7 +149,6 @@ def tweet(data):
     write_to_file_tweets()
 
 
-
 def user_stats_retweet():
     api = init_twitter()
     users = {'1': "WHOPhilippines", '2': "PhilippineStar"}
@@ -175,13 +176,12 @@ def user_stats_retweet():
         print('Error')
 
 
-
-
 def main():
     # use this directly if already have the data and screenshots
     # data_dict = image_to_text.pytess()
     # tweet(data_dict)
     pass
+
 
 if __name__ == "__main__":
     # use this if data is already in data.txt

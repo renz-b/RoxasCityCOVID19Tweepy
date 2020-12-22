@@ -9,6 +9,7 @@ root_dir = os.getcwd()
 now = datetime.now()
 current_date = now.strftime('%Y-%m-%d')
 
+
 def edit_data_before_tweet(data_dict):
     # Changes data before tweeting
     while True:
@@ -44,6 +45,7 @@ def edit_data_before_tweet(data_dict):
         else:
             break
 
+
 def current_covid_19_data_dictionary():
     image_to_text.files_workdir()
     image_to_text.folder_date()
@@ -52,6 +54,7 @@ def current_covid_19_data_dictionary():
     # pytess func returns dict type of data
     return image_to_text.pytess()
 
+
 def current_covid_19_data_dictionary_ifwithscreenshots(date=current_date):
     if os.getcwd() == root_dir:
         os.chdir('..\\files\\{}'.format(date))
@@ -59,6 +62,7 @@ def current_covid_19_data_dictionary_ifwithscreenshots(date=current_date):
         os.chdir(root_dir)
         os.chdir('..\\files\\{}'.format(date))
     return image_to_text.pytess()
+
 
 def data_pretty_print():
     os.chdir(root_dir)
@@ -72,6 +76,7 @@ def data_pretty_print():
             for k, v in dict_history[date_key].items():
                 print('{}: {}'.format(k,v))
             print('\n\n')
+
 
 def main():
     data_pretty_print()

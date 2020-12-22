@@ -24,6 +24,7 @@ def files_workdir():
     except:
         raise FileNotFoundError
 
+
 # creates new folder everyday containing screenshots with format datetime m-d-y
 def folder_date():
     file_path = os.getcwd()
@@ -40,11 +41,13 @@ def folder_date():
         os.mkdir('{}\\{}'.format(file_path, folder_name))
         os.chdir(folder_name)
 
+
 # appends to a txt file in type str for future purposes
 def write_to_file(data):
     os.chdir(root)
     with open('data.txt', 'a') as file:
         file.write('{}\n'.format(str(data)))
+
 
 # returns a dictionary of the text in the screenshots
 def pytess():

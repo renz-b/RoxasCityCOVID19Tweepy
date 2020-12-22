@@ -7,6 +7,7 @@ options = webdriver.ChromeOptions()
 options.add_experimental_option('excludeSwitches', ['enable-logging'])
 driver = webdriver.Chrome(executable_path=PATH, options=options) 
 
+
 # automates the search parameters that I need 
 # find a way to extract data maybe an api
 def automation_script():
@@ -70,6 +71,7 @@ def automation_script():
     link = driver.find_element_by_xpath("""/html/body""")
     link.click()
 
+
 #screenshots the needed data and moves to file/date dir
 def scrnshot(): 
     driver.find_element_by_xpath(
@@ -104,8 +106,10 @@ def scrnshot():
                 'date_facilities.png')
     driver.close()
 
+
 def main():
     pass
+
 
 if __name__ == '__main__':
     main()
