@@ -2,6 +2,7 @@ import tweepy
 from datetime import datetime
 import re
 import os
+import ast
 # import image_to_text if already have screenshots and tweet directly
 # import image_to_text
 
@@ -66,6 +67,7 @@ def init_twitter():
     return tweepy.API(auth, wait_on_rate_limit=True,
         wait_on_rate_limit_notify=True)
 
+
 def tweet(data):
     api = init_twitter()
 
@@ -124,7 +126,8 @@ def tweet(data):
             \nHospitals:
             - CDH, CEH, RMPH, St. Anthony, The Health Centrum
             @rxstwitte_rbot
-            """.format(' '.join(data['date_facilities']),''.join(data['bed_occupancy'][0]),''.join(data['bed_occupancy'][1])), in_reply_to_status_id=tweet2.id)
+            """.format(' '.join(data['date_facilities']),''.join(data['bed_occupancy'][0]),''.join(data['bed_occupancy'][1])), 
+            in_reply_to_status_id=tweet2.id)
 
 
     tweet4 = api.update_status("""Date of runtime: {}
@@ -133,11 +136,16 @@ def tweet(data):
     
     def write_to_file_tweets():
         tweets = """{{'{}':[\n{}\n{}\n{}\n{}\n]}}\n""".format(now.strftime("%Y-%B-%d"), tweet1.text, tweet2.text, tweet3.text, tweet4.text)
+        stripped_tweet = ''
+        tweet = ''
+        for line in tweets:
+            newline = line.replace('\n', ' ')
+            tweet += newline
+            tweet_to_txt = re.sub(r"\s+", ' ', stripped_tweet)
         with open('tweets.txt', 'a') as file:
-            file.write(tweets)
+            file.write(tweet_to_txt)
 
     write_to_file_tweets()
-
 
 
 def user_stats_retweet():
@@ -167,13 +175,23 @@ def user_stats_retweet():
         print('Error')
 
 
-
-
 def main():
     # use this directly if already have the data and screenshots
     # data_dict = image_to_text.pytess()
     # tweet(data_dict)
     pass
 
+
 if __name__ == "__main__":
+    # use this if data is already in data.txt
+    # dict_history = {}
+    # with open('data.txt', 'r') as file:
+    #     lines = file.readlines()
+    #     for line in lines:
+    #         dict_ = ast.literal_eval(line)
+    #         date_key = dict_['_id']
+    #         dict_history[date_key] = dict_
+    #     data = dict_history['2020-12-16']
+    # tweet(data)
     user_stats_retweet()
+    pass

@@ -1,8 +1,8 @@
-import tinydb
 import datetime
+import tinydb
 
 
-def write(infoCases, infoTests, infoBeds):
+def write(data):
     """
 
     :param infoCases:
@@ -35,23 +35,23 @@ def write(infoCases, infoTests, infoBeds):
 #   update db
     dbCases.insert({
         'date': date,
-        'totalcases': infoCases[0],
-        'totaldeaths': infoCases[1],
-        'activecases': infoCases[2],
-        'recovered': infoCases[3]
+        'totalcases': data['total_cases'][2],
+        'totaldeaths': data['died'],
+        'activecases': data['active_cases'][2],
+        'recovered': data['recovered'][1]
     })
 
     dbTests.insert({
         'date': date,
-        'totaltests': infoTests[0],
-        'dailytests': infoTests[1],
-        'remainingtests': infoTests[2]
+        'totaltests': data['samples_tested'][3],
+        'dailytests': data['samples_tested'][4],
+        'remainingtests': data['samples_tested'][9]
     })
 
     dbBeds.insert({
         'date': date,
-        'occupied': infoBeds[0],
-        'vacant': infoBeds[1]
+        'occupied': data['bed_occupancy'][0],
+        'vacant': data['bed_occupancy'][1]
     })
 
 

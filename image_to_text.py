@@ -5,6 +5,7 @@ import csv
 from PIL import Image, ImageOps, ImageEnhance
 from datetime import datetime
 tess.pytesseract.tesseract_cmd = r'D:\\PythonProjects\\Tesseract-OCR\\tesseract.exe'
+import datahandle
 
 root = os.getcwd()
 date = datetime.now()
@@ -70,11 +71,13 @@ def pytess():
 
 def main():
     # os.chdir('..')
-    # os.chdir('files\\12-08-2020')
+    # os.chdir('files\\2020-12-18')
     # dictt = pytess()
     # print(dictt)
     # print(type(dictt))
     # print(dictt['_id'])
+    # os.chdir(root)
+    # datahandle.write(dictt)
     pass
 if __name__ == '__main__':
     main()
